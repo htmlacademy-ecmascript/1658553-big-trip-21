@@ -1,4 +1,4 @@
-import {createElement} from '../../../render.js';
+import {createElement} from 'src/render.js';
 
 function createNewTripElementTemplate(fullDate, shortDate, iconSrc, eventTitle, eventFullStartTime, eventShortStartTime, eventFullEndTime,
   eventShortEndTime,eventDuration,eventPriceValue,eventOfferTitle,eventOfferPrice) {

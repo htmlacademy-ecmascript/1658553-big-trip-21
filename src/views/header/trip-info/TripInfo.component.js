@@ -1,6 +1,6 @@
-import {createElement} from '../../../render.js';
+import {createElement} from 'src/render.js';
 
-function createNewTravelLogoTemplate() {
+function createNewTripInfoTemplate() {
   return `
                <section class="trip-main__trip-info  trip-info">
             <div class="trip-info__main">
@@ -19,7 +19,7 @@ export default class TripInfoComponent {
 
 
   getTemplate() {
-    return createNewTravelLogoTemplate();
+    return createNewTripInfoTemplate();
   }
 
   getElement() {

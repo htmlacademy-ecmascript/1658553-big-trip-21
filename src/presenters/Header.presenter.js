@@ -1,11 +1,11 @@
-import BigYellowBtn from '../views/btns-inputs/big-yellow-btn/BigYellowBtn.component';
-import FilterElement from '../views/header/filters/FilterElement.component';
-import FilterForm from '../views/header/filters/FilterForm.component';
-import HeaderLogo from '../views/header/logo/HeaderLogo.component';
-import TripInfo from '../views/header/trip-info/TripInfo.component';
-import Header from '../views/header/Header.component';
+import BigYellowBtn from 'src/views/btns-inputs/big-yellow-btn/BigYellowBtn.component';
+import FilterElement from 'src/views/header/filters/FilterElement.component';
+import FilterForm from 'src/views/header/filters/FilterForm.component';
+import HeaderLogo from 'src/views/header/logo/HeaderLogo.component';
+import TripInfo from 'src/views/header/trip-info/TripInfo.component';
+import Header from 'src/views/header/Header.component';
 
-import {render} from '../render.js';
+import {render} from 'src/render.js';
 
 export default class HeaderPresenter {
   bigYellowBtn = new BigYellowBtn('New event');

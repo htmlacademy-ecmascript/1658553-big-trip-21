@@ -1,4 +1,4 @@
-import {createElement} from '../../render.js';
+import {createElement} from 'src/render.js';
 
 function createHeaderTemplate() {
   return `<header class="page-header">

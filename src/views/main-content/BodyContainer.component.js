@@ -1,4 +1,4 @@
-import {createElement} from '../../render.js';
+import {createElement} from 'src/render.js';
 
 function createBodyTemplate() {
   return `<div class="page-body__container">

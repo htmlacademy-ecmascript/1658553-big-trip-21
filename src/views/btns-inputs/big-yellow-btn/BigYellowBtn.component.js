@@ -1,4 +1,4 @@
-import {createElement} from '../../../render.js';
+import {createElement} from 'src/render.js';
 
 function createBigYellowBtnTemplate(buttonText,disabled) {
   return `<button class="trip-main__event-add-btn  btn  btn--big  btn--yellow" type="button" ${disabled ? 'disabled' : ''}>${buttonText}</button>`;

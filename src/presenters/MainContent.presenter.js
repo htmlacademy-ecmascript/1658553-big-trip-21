@@ -1,11 +1,11 @@
-import {render} from '../render.js';
-import BodyContainerComponent from '../views/main-content/BodyContainer.component';
-import FilterFormComponent from '../views/main-content/filtres/FilterForm.component';
-import TripElementComponent from '../views/main-content/trip/TripElement.component';
-import TripUlComponent from '../views/main-content/trip/TripUl.component';
-import FilterElementComponent from '../views/main-content/filtres/FilterElement.component';
-import PointEditorFormComponent from '../views/options/edit-point/PointEditorForm.component';
+import BodyContainerComponent from 'src/views/main-content/BodyContainer.component';
+import FilterFormComponent from 'src/views/main-content/filtres/FilterForm.component';
+import TripElementComponent from 'src/views/main-content/trip/TripElement.component';
+import TripUlComponent from 'src/views/main-content/trip/TripUl.component';
+import FilterElementComponent from 'src/views/main-content/filtres/FilterElement.component';
+import PointEditorFormComponent from 'src/views/options/edit-point/PointEditorForm.component';
 
+import {render} from 'src/render.js';
 export default class MainContentPresenter {
   bodyContainer = new BodyContainerComponent();
   filterForm = new FilterFormComponent('#', 'get');

@@ -1,5 +1,5 @@
-import HeaderPresenter from './presenters/Header.presenter';
-import MainContentPresenter from './presenters/MainContent.presenter';
+import HeaderPresenter from 'src/presenters/Header.presenter';
+import MainContentPresenter from 'src/presenters/MainContent.presenter';
 
 
 const pageBody = document.querySelector('.page-body');

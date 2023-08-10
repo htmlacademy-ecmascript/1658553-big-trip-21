@@ -1,4 +1,4 @@
-import {createElement} from '../../../render.js';
+import {createElement} from 'src/render.js';
 
 function createNewFilterFormTemplate(actionUrl, method) {
   return `<form class="trip-events__trip-sort  trip-sort" action="${actionUrl}" method="${method}">
