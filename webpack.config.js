@@ -9,6 +9,11 @@ module.exports = {
     path: path.resolve(__dirname, 'build'), // Директория для файлов сборки
     clean: true, // Удаляем предыдущую сборку перед созданием новой
   },
+  resolve: {
+    alias: {
+      src: path.resolve(__dirname, 'src'), // Добавляем алиас 'src'
+    },
+  },
   devtool: 'source-map', // Генерируем карту исходного кода
   plugins: [ // Подключаем плагины
     new HtmlPlugin({
