@@ -1,6 +1,6 @@
 import Header from 'src/views/header/Header.component';
-import FilterForm from 'src/views/header/Filter/Filter.component';
-import {render} from 'src/render.js';
+import FilterForm from 'src/views/header/filter/Filter.component';
+import {render, RenderPosition} from 'src/render.js';
 
 export default class HeaderPresenter {
 
@@ -45,8 +45,8 @@ export default class HeaderPresenter {
   }
 
   init() {
-    render(this.header, this.pageBody, 'afterbegin');
-    render(new FilterForm(this.getFilterElementData()), this.header, 'afterbegin');
+    render(this.header, this.pageBody, RenderPosition.AFTERBEGIN);
+    render(new FilterForm(this.getFilterElementData()), this.header.getElement().querySelector('.trip-controls__filters'));
 
   }
 }

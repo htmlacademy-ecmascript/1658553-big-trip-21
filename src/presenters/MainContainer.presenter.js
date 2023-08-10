@@ -1,7 +1,9 @@
 import BodyContainerComponent from 'src/views/main-container/MainContainer.component';
+import FiltersForm from 'src/views/main-container/filter/Filter.component';
+import TripList from 'src/views/main-container/trip-list/TripList.componentElement';
+import TripListEditor from 'src/views/main-container/trip-list/TripListEditor.component';
 
-
-import {render} from 'src/render.js';
+import {render, RenderPosition} from 'src/render.js';
 export default class MainContainerPresenter {
   mainContainer = new BodyContainerComponent();
 
@@ -10,48 +12,53 @@ export default class MainContainerPresenter {
   }
 
   getFilterElementData() {
-    return {
-      1: {
+    return [
+      {
         id: 'sort-day',
         value: 'sort-day',
         checked: true,
         disabled: false,
-        labelText: 'Day'
+        labelText: 'Day',
+        class: 'trip-sort__item--day'
       },
-      2: {
+      {
         id: 'sort-event',
         value: 'sort-event',
         checked: false,
         disabled: true,
-        labelText: 'Event'
+        labelText: 'Event',
+        class: 'trip-sort__item--event'
       },
-      3: {
+      {
         id: 'sort-time',
         value: 'sort-time',
         checked: false,
         disabled: false,
-        labelText: 'Time'
+        labelText: 'Time',
+        class: 'trip-sort__item--time'
       },
-      4: {
+      {
         id: 'sort-price',
         value: 'sort-price',
         checked: false,
         disabled: false,
-        labelText: 'Price'
+        labelText: 'Price',
+        class: 'trip-sort__item--price'
       },
-      5: {
+      {
         id: 'sort-offer',
         value: 'sort-offer',
         checked: false,
         disabled: false,
-        labelText: 'Offers'
+        labelText: 'Offers',
+        class: 'trip-sort__item--offer'
       }
-    };
+    ];
   }
 
-  getMainContent() {
-    return {
-      1: {
+  getTripList() {
+    return [
+      {
         fullDate: '2019-03-18',
         shortDate: 'MAR 18',
         iconSrc: 'img/icons/taxi.png',
@@ -66,7 +73,7 @@ export default class MainContainerPresenter {
         eventOfferPrice: '20',
         isEdit: false
       },
-      2: {
+      {
         fullDate: '2019-03-18',
         shortDate: 'MAR 18',
         iconSrc: 'img/icons/flight.png',
@@ -81,7 +88,7 @@ export default class MainContainerPresenter {
         eventOfferPrice: '50',
         isEdit: true
       },
-      3: {
+      {
         fullDate: '2019-03-18',
         shortDate: 'MAR 18',
         iconSrc: 'img/icons/drive.png',
@@ -96,11 +103,23 @@ export default class MainContainerPresenter {
         eventOfferPrice: '200',
         isEdit: false
       },
-    };
+    ];
+  }
+
+  getListItemComponent(TripListItem) {
+    if (TripListItem.isEdit){
+      return new TripListEditor(TripListItem);
+    }
+    return new TripList(TripListItem);
   }
 
   init() {
-    render(this.mainContainer, this.pageBody.querySelector('.page-body__page-main '), 'afterbegin');
+    render(this.mainContainer, this.pageBody.querySelector('.page-body__page-main '), RenderPosition.AFTERBEGIN);
+    render(new FiltersForm(this.getFilterElementData()), this.mainContainer.getElement().querySelector('.trip-events__list'),RenderPosition.BEFOREBEGIN);
+
+    for (const tripListItem of this.getTripList()) {
+      render(this.getListItemComponent(tripListItem), this.mainContainer.getElement().querySelector('.trip-events__list'));
+    }
 
   }
 
