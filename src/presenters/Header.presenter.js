@@ -1,5 +1,5 @@
 import Header from 'src/views/header/Header.component';
-import FilterForm from 'src/views/header/filter/Filter.component';
+import FilterForm from 'src/views/header/filter/FilterForm.component';
 import {render, RenderPosition} from 'src/render.js';
 
 export default class HeaderPresenter {

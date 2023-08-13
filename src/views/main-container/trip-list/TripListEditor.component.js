@@ -1,7 +1,7 @@
 import {createElement} from 'src/render.js';
 
 
-function createHeaderTemplate() {
+function createHTMLTemplate() {
 
   return `<li class="trip-events__item">
               <form class="event event--edit" action="#" method="post">
@@ -166,7 +166,7 @@ export default class TripListEditorComponent {
 
 
   getTemplate() {
-    return createHeaderTemplate();
+    return createHTMLTemplate();
   }
 
   getElement() {

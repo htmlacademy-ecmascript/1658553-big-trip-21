@@ -17,7 +17,7 @@ function generateFilterHTML(filter) {
 
 }
 
-function createHeaderTemplate(filters) {
+function createHTMLTemplate(filters) {
   let filterTemplate = '';
 
   for (const filter of filters) {
@@ -38,7 +38,7 @@ export default class FilterComponent {
   }
 
   getTemplate() {
-    return createHeaderTemplate(this.filtres);
+    return createHTMLTemplate(this.filtres);
   }
 
   getElement() {

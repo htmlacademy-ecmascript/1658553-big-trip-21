@@ -1,6 +1,6 @@
 import {createElement} from 'src/render.js';
 
-function createBodyTemplate() {
+function createHTMLTemplate() {
   return `<div class="page-body__container">
         <section class="trip-events">
           <h2 class="visually-hidden">Trip events</h2>
@@ -13,7 +13,7 @@ export default class MainContainerComponent {
 
 
   getTemplate() {
-    return createBodyTemplate();
+    return createHTMLTemplate();
   }
 
   getElement() {

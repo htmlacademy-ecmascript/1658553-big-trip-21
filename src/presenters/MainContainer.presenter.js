@@ -1,6 +1,6 @@
 import BodyContainerComponent from 'src/views/main-container/MainContainer.component';
 import FiltersForm from 'src/views/main-container/filter/Filter.component';
-import TripList from 'src/views/main-container/trip-list/TripList.componentElement';
+import TripList from 'src/views/main-container/trip-list/TripListElement.component';
 import TripListEditor from 'src/views/main-container/trip-list/TripListEditor.component';
 
 import {render, RenderPosition} from 'src/render.js';
