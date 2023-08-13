@@ -16,7 +16,7 @@ function generateFilterHTML(filter) {
     </div>`;
 }
 
-function createHeaderTemplate(filters) {
+function createHTMLTemplate(filters) {
   let filterTemplate = '';
 
   for (const filter of filters) {
@@ -29,13 +29,13 @@ function createHeaderTemplate(filters) {
   </form>`;
 }
 
-export default class HeaderComponent {
+export default class FilterFormComponent {
   constructor(filters) {
     this.filtres = filters;
   }
 
   getTemplate() {
-    return createHeaderTemplate(this.filtres);
+    return createHTMLTemplate(this.filtres);
   }
 
   getElement() {
@@ -50,3 +50,4 @@ export default class HeaderComponent {
     this.element = null;
   }
 }
+

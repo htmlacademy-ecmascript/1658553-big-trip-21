@@ -1,7 +1,7 @@
 import {createElement} from 'src/render.js';
 
 
-function createHeaderTemplate(wayPoint) {
+function createHTMLTemplate(wayPoint) {
 
   return `<li class="trip-events__item">
         <div class="event">
@@ -44,13 +44,13 @@ function createHeaderTemplate(wayPoint) {
 
 }
 
-export default class TripListComponentElement {
+export default class TripListElementComponent {
   constructor(wayPoint) {
     this.wayPoint = wayPoint;
   }
 
   getTemplate() {
-    return createHeaderTemplate(this.wayPoint);
+    return createHTMLTemplate(this.wayPoint);
   }
 
   getElement() {

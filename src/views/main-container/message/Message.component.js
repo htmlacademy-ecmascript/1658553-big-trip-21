@@ -1,7 +1,7 @@
 import {createElement} from 'src/render.js';
 
 
-function createHeaderTemplate(message) {
+function createHTMLTemplate(message) {
 
   return `<p class="trip-events__msg">${message}</p>`;
 
@@ -14,7 +14,7 @@ export default class MessageComponent {
   }
 
   getTemplate() {
-    return createHeaderTemplate(this.message);
+    return createHTMLTemplate(this.message);
   }
 
   getElement() {
