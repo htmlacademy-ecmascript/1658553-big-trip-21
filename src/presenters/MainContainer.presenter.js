@@ -4,11 +4,13 @@ import TripList from 'src/views/main-container/trip-list/TripListElement.compone
 import TripListEditor from 'src/views/main-container/trip-list/TripListEditor.component';
 
 import {render, RenderPosition} from 'src/render.js';
+
 export default class MainContainerPresenter {
   mainContainer = new BodyContainerComponent();
 
-  constructor(pageBody) {
+  constructor(pageBody, TripListModel) {
     this.pageBody = pageBody;
+    this.tripListModel = TripListModel;
   }
 
   getFilterElementData() {
@@ -56,69 +58,19 @@ export default class MainContainerPresenter {
     ];
   }
 
-  getTripList() {
-    return [
-      {
-        fullDate: '2019-03-18',
-        shortDate: 'MAR 18',
-        iconSrc: 'img/icons/taxi.png',
-        eventTitle: 'Taxi Amsterdam',
-        eventFullStartTime: '2019-03-18T10:30',
-        eventShortStartTime: '10:30',
-        eventFullEndTime: '2019-03-18T11:00',
-        eventShortEndTime: '11:00',
-        eventDuration: '30M',
-        eventPriceValue: '20',
-        eventOfferTitle: 'Order Uber',
-        eventOfferPrice: '20',
-        isEdit: false
-      },
-      {
-        fullDate: '2019-03-18',
-        shortDate: 'MAR 18',
-        iconSrc: 'img/icons/flight.png',
-        eventTitle: 'Flight Chamonix',
-        eventFullStartTime: '2019-03-18T12:25',
-        eventShortStartTime: '12:25',
-        eventFullEndTime: '2019-03-18T13:35',
-        eventShortEndTime: '13:35',
-        eventDuration: '01H 10M',
-        eventPriceValue: '160',
-        eventOfferTitle: 'Add luggage',
-        eventOfferPrice: '50',
-        isEdit: true
-      },
-      {
-        fullDate: '2019-03-18',
-        shortDate: 'MAR 18',
-        iconSrc: 'img/icons/drive.png',
-        eventTitle: 'Drive Chamonix',
-        eventFullStartTime: '2019-03-18T14:30',
-        eventShortStartTime: '14:30',
-        eventFullEndTime: '2019-03-18T16:05',
-        eventShortEndTime: '16:05',
-        eventDuration: '01H 35M',
-        eventPriceValue: '160',
-        eventOfferTitle: 'Rent a car',
-        eventOfferPrice: '200',
-        isEdit: false
-      },
-    ];
-  }
-
-  getListItemComponent(TripListItem) {
-    if (TripListItem.isEdit){
-      return new TripListEditor(TripListItem);
+  getTripListItemElement(tripListItem) {
+    if (tripListItem.isEdit) {
+      return new TripListEditor(tripListItem);
     }
-    return new TripList(TripListItem);
+    return new TripList(tripListItem);
   }
 
   init() {
     render(this.mainContainer, this.pageBody.querySelector('.page-body__page-main '), RenderPosition.AFTERBEGIN);
-    render(new FiltersForm(this.getFilterElementData()), this.mainContainer.getElement().querySelector('.trip-events__list'),RenderPosition.BEFOREBEGIN);
+    render(new FiltersForm(this.getFilterElementData()), this.mainContainer.getElement().querySelector('.trip-events__list'), RenderPosition.BEFOREBEGIN);
 
-    for (const tripListItem of this.getTripList()) {
-      render(this.getListItemComponent(tripListItem), this.mainContainer.getElement().querySelector('.trip-events__list'));
+    for (const tripListItem of this.tripListModel.getPoints()) {
+      render(this.getTripListItemElement(tripListItem), this.mainContainer.getElement().querySelector('.trip-events__list'));
     }
 
   }

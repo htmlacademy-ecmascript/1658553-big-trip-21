@@ -1,34 +1,49 @@
 import {createElement} from 'src/render.js';
+import {formatDateToEventDate,getIconForType,formatTimeRange,timeDifference} from 'src/utils';
+function offersTemplate(wayPoint) {
+  if (wayPoint.offers.length > 0) {
+    const maxOffersToShow = 2; // Максимальное количество offers для отображения
+    const offerElements = wayPoint.offers
+      .slice(0, maxOffersToShow)
+      .map((offerElement) => `
+        <li class="event__offer">
+          <span class="event__offer-title">${offerElement.title}</span>
+          &plus;&euro;&nbsp;
+          <span class="event__offer-price">${offerElement.price}</span>
+        </li>`
+      )
+      .join('');
 
+    return `
+      <h4 class="visually-hidden">Offers:</h4>
+      <ul class="event__selected-offers">
+        ${offerElements}
+      </ul>`;
+  }
+  return '';
+}
 
 function createHTMLTemplate(wayPoint) {
-
+  const extraBlock = offersTemplate(wayPoint);
   return `<li class="trip-events__item">
         <div class="event">
-            <time class="event__date" dateTime="${wayPoint.fullDate}">${wayPoint.shortDate}</time>
+            <time class="event__date" dateTime="${wayPoint.date_from}">${formatDateToEventDate(wayPoint.date_from)}</time>
             <div class="event__type">
-                <img class="event__type-icon" width="42" height="42" src="${wayPoint.iconSrc}" alt="Event type icon">
+                <img class="event__type-icon" width="42" height="42" src="${getIconForType(wayPoint.type)}" alt="Event type icon">
             </div>
-            <h3 class="event__title">${wayPoint.eventTitle}</h3>
+            <h3 class="event__title">${wayPoint.type}</h3>
             <div class="event__schedule">
                 <p class="event__time">
-                    <time class="event__start-time" dateTime="${wayPoint.eventFullStartTime}">${wayPoint.eventShortStartTime}</time>
+                    <time class="event__start-time" dateTime="${wayPoint.date_from}">${formatTimeRange(wayPoint.date_from)}</time>
                     &mdash;
-                    <time class="event__end-time" dateTime="${wayPoint.eventFullEndTime}">${wayPoint.eventShortEndTime}</time>
+                    <time class="event__end-time" dateTime="${wayPoint.date_to}">${formatTimeRange(wayPoint.date_to)}</time>
                 </p>
-                <p class="event__duration">${wayPoint.eventDuration}</p>
+                <p class="event__duration">${timeDifference(wayPoint.date_from,wayPoint.date_to)}</p>
             </div>
             <p class="event__price">
-                &euro;&nbsp;<span class="event__price-value">${wayPoint.eventPriceValue}</span>
+                &euro;&nbsp;<span class="event__price-value">${wayPoint.base_price}</span>
             </p>
-            <h4 class="visually-hidden">Offers:</h4>
-            <ul class="event__selected-offers">
-                <li class="event__offer">
-                    <span class="event__offer-title">${wayPoint.eventOfferTitle}</span>
-                    &plus;&euro;&nbsp;
-                    <span class="event__offer-price">${wayPoint.eventOfferPrice}</span>
-                </li>
-            </ul>
+            ${extraBlock}
             <button class="event__favorite-btn event__favorite-btn--active" type="button">
                 <span class="visually-hidden">Add to favorite</span>
                 <svg class="event__favorite-icon" width="28" height="28" viewBox="0 0 28 28">
