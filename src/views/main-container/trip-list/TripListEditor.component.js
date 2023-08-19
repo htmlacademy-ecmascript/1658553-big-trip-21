@@ -1,8 +1,7 @@
 import {createElement} from 'src/render.js';
-import {formatDateToEventDate,getIconForType,formatTimeRange,timeDifference} from 'src/utils';
+import {getIconForType} from 'src/utils';
 
 function createHTMLTemplate(wayPoint) {
-  console.log(wayPoint);
   return `<li class="trip-events__item">
               <form class="event event--edit" action="#" method="post">
                 <header class="event__header">
