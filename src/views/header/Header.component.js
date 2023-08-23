@@ -1,4 +1,4 @@
-import {createElement} from 'src/render.js';
+import AbstractView from 'src/framework/view/abstract-view';
 
 function createHTMLTemplate() {
   return `<header class="page-header">
@@ -31,22 +31,10 @@ function createHTMLTemplate() {
     </header>`;
 }
 
-export default class HeaderComponent {
+export default class HeaderComponent extends AbstractView {
 
 
-  getTemplate() {
+  get template() {
     return createHTMLTemplate();
-  }
-
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
-
-    return this.element;
-  }
-
-  removeElement() {
-    this.element = null;
   }
 }

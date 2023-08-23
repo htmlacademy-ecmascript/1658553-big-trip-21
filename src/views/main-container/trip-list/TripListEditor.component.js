@@ -1,5 +1,6 @@
 import {createElement} from 'src/render.js';
 import {getIconForType} from 'src/utils';
+import AbstractView from "src/framework/view/abstract-view";
 
 function createHTMLTemplate(wayPoint) {
   return `<li class="trip-events__item">
@@ -161,24 +162,15 @@ function createHTMLTemplate(wayPoint) {
 
 }
 
-export default class TripListEditorComponent {
+export default class TripListEditorComponent extends AbstractView {
+  #wayPoint = null
   constructor(wayPoint) {
-    this.wayPoint = wayPoint;
+    super();
+    this.#wayPoint = wayPoint;
   }
 
-  getTemplate() {
-    return createHTMLTemplate(this.wayPoint);
-  }
 
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
-
-    return this.element;
-  }
-
-  removeElement() {
-    this.element = null;
+  get template() {
+    return createHTMLTemplate(this.#wayPoint);
   }
 }

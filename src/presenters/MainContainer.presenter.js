@@ -3,17 +3,19 @@ import FiltersForm from 'src/views/main-container/filter/Filter.component';
 import TripList from 'src/views/main-container/trip-list/TripListElement.component';
 import TripListEditor from 'src/views/main-container/trip-list/TripListEditor.component';
 
-import {render, RenderPosition} from 'src/render.js';
+import {render, RenderPosition} from 'src/framework/render';
 
 export default class MainContainerPresenter {
   mainContainer = new BodyContainerComponent();
+  #pageBody = null;
+  #tripListModel = null;
 
   constructor(pageBody, TripListModel) {
-    this.pageBody = pageBody;
-    this.tripListModel = TripListModel;
+    this.#pageBody = pageBody;
+    this.#tripListModel = TripListModel;
   }
 
-  getFilterElementData() {
+  #getFilterElementData() {
     return [
       {
         id: 'sort-day',
@@ -58,7 +60,7 @@ export default class MainContainerPresenter {
     ];
   }
 
-  getTripListItemElement(tripListItem) {
+  #getTripListItemElement(tripListItem) {
     if (tripListItem.isEdit) {
       return new TripListEditor(tripListItem);
     }
@@ -66,11 +68,11 @@ export default class MainContainerPresenter {
   }
 
   init() {
-    render(this.mainContainer, this.pageBody.querySelector('.page-body__page-main '), RenderPosition.AFTERBEGIN);
-    render(new FiltersForm(this.getFilterElementData()), this.mainContainer.getElement().querySelector('.trip-events__list'), RenderPosition.BEFOREBEGIN);
+    render(this.mainContainer, this.#pageBody.querySelector('.page-body__page-main '), RenderPosition.AFTERBEGIN);
+    render(new FiltersForm(this.#getFilterElementData()), this.mainContainer.element.querySelector('.trip-events__list'), RenderPosition.BEFOREBEGIN);
 
-    for (const tripListItem of this.tripListModel.getPoints()) {
-      render(this.getTripListItemElement(tripListItem), this.mainContainer.getElement().querySelector('.trip-events__list'));
+    for (const tripListItem of this.#tripListModel.points) {
+      render(this.#getTripListItemElement(tripListItem), this.mainContainer.element.querySelector('.trip-events__list'));
     }
 
   }

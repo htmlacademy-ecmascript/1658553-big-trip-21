@@ -1,4 +1,4 @@
-import {createElement} from 'src/render.js';
+import AbstractView from 'src/framework/view/abstract-view';
 
 function generateFilterHTML(filter) {
   return `
@@ -29,25 +29,15 @@ function createHTMLTemplate(filters) {
   </form>`;
 }
 
-export default class FilterFormComponent {
+export default class FilterFormComponent extends AbstractView {
+  #filters = null;
   constructor(filters) {
-    this.filtres = filters;
+    super();
+    this.#filters = filters;
   }
 
-  getTemplate() {
-    return createHTMLTemplate(this.filtres);
-  }
-
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
-
-    return this.element;
-  }
-
-  removeElement() {
-    this.element = null;
+  get template() {
+    return createHTMLTemplate(this.#filters);
   }
 }
 
