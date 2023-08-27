@@ -60,9 +60,17 @@ export default class MainContainerPresenter {
     ];
   }
 
+  onRollupButtonClick (component,wayPoint) {
+    console.log(this)
+    component.removeElement();
+    const wayPointComponent = new (wayPoint);
+
+    render(wayPointComponent, this.mainContainer.element.querySelector('.trip-events__list'));
+  }
+
   #getTripListItemElement(tripListItem) {
     if (tripListItem.isEdit) {
-      return new TripListEditor(tripListItem);
+      return new TripListEditor(tripListItem, this.onRollupButtonClick);
     }
     return new TripList(tripListItem);
   }

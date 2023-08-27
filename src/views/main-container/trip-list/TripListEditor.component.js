@@ -163,14 +163,28 @@ function createHTMLTemplate(wayPoint) {
 }
 
 export default class TripListEditorComponent extends AbstractView {
-  #wayPoint = null
-  constructor(wayPoint) {
+  #wayPoint = null;
+  #onRollupButtonClick = null;
+  constructor(wayPoint,onRollupButtonClick) {
     super();
     this.#wayPoint = wayPoint;
+    this.#onRollupButtonClick = onRollupButtonClick;
+    this.setupEventHandling();
   }
 
 
   get template() {
     return createHTMLTemplate(this.#wayPoint);
+  }
+
+  setupEventHandling() {
+    const rollupBtn = this.element.querySelector('.event__rollup-btn');
+
+    const handleRollupButtonClick = () => {
+      this.#wayPoint.isEdit = false;
+      return this.#onRollupButtonClick(this,this.#wayPoint);
+    };
+
+    rollupBtn.addEventListener('click', handleRollupButtonClick);
   }
 }
