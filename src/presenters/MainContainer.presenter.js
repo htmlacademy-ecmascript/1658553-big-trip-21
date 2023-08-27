@@ -13,6 +13,7 @@ export default class MainContainerPresenter {
   constructor(pageBody, TripListModel) {
     this.#pageBody = pageBody;
     this.#tripListModel = TripListModel;
+    this.componentsMap = new Map();
   }
 
   #getFilterElementData() {
@@ -60,19 +61,25 @@ export default class MainContainerPresenter {
     ];
   }
 
-  onRollupButtonClick (component,wayPoint) {
-    console.log(this)
-    component.removeElement();
-    const wayPointComponent = new (wayPoint);
+  onRollupButtonClick(component, tripListItem) {
 
-    render(wayPointComponent, this.mainContainer.element.querySelector('.trip-events__list'));
+    if (component instanceof TripList) {
+      const newTripList = new TripListEditor(tripListItem,component.onRollupButtonClick);
+      render(newTripList, component.element, RenderPosition.BEFOREBEGIN);
+      component.element.remove();
+    } else {
+      const newTripList = new TripList(tripListItem,component.onRollupButtonClick);
+      render(newTripList, component.element, RenderPosition.BEFOREBEGIN);
+      component.element.remove();
+    }
+
   }
 
   #getTripListItemElement(tripListItem) {
     if (tripListItem.isEdit) {
       return new TripListEditor(tripListItem, this.onRollupButtonClick);
     }
-    return new TripList(tripListItem);
+    return new TripList(tripListItem,this.onRollupButtonClick);
   }
 
   init() {
