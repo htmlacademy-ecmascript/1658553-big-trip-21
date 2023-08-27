@@ -2,7 +2,10 @@ import {getDestinationsForPoint, getOffersForPoint, getPoints} from 'src/mock/Tr
 
 const TRIPS_COUNT = 3;
 export default class TripListModel {
-  points = getPoints().slice(0,TRIPS_COUNT);
+
+  get points() {
+    return getPoints().slice(0,TRIPS_COUNT);
+  }
 
   getPoints() {
     return this.points.map((point) => ({...point, offers: this.getOffersForPoint(point)}));

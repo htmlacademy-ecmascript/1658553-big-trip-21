@@ -1,4 +1,5 @@
 import {createElement} from 'src/render.js';
+import AbstractView from "src/framework/view/abstract-view";
 
 
 function createHTMLTemplate(message) {
@@ -8,24 +9,14 @@ function createHTMLTemplate(message) {
 
 }
 
-export default class MessageComponent {
+export default class MessageComponent extends AbstractView {
+  #message = null;
   constructor(message) {
-    this.message = message;
+    super();
+    this.#message = message;
   }
 
-  getTemplate() {
-    return createHTMLTemplate(this.message);
-  }
-
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
-
-    return this.element;
-  }
-
-  removeElement() {
-    this.element = null;
+  get template() {
+    return createHTMLTemplate(this.#message);
   }
 }

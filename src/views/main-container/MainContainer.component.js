@@ -1,4 +1,4 @@
-import {createElement} from 'src/render.js';
+import AbstractView from 'src/framework/view/abstract-view';
 
 function createHTMLTemplate() {
   return `<div class="page-body__container">
@@ -9,22 +9,9 @@ function createHTMLTemplate() {
       </div>`;
 }
 
-export default class MainContainerComponent {
+export default class MainContainerComponent extends AbstractView{
 
-
-  getTemplate() {
+  get template() {
     return createHTMLTemplate();
-  }
-
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
-
-    return this.element;
-  }
-
-  removeElement() {
-    this.element = null;
   }
 }

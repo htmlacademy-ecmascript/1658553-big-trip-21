@@ -1,5 +1,6 @@
 import {createElement} from 'src/render.js';
 import {getIconForType} from 'src/utils';
+import AbstractView from "src/framework/view/abstract-view";
 
 function createHTMLTemplate(wayPoint) {
   return `<li class="trip-events__item">
@@ -161,24 +162,28 @@ function createHTMLTemplate(wayPoint) {
 
 }
 
-export default class TripListEditorComponent {
-  constructor(wayPoint) {
-    this.wayPoint = wayPoint;
+export default class TripListEditorComponent extends AbstractView {
+  #wayPoint = null;
+  onRollupButtonClick = null;
+  constructor(wayPoint,onRollupButtonClick) {
+    super();
+    this.#wayPoint = wayPoint;
+    this.onRollupButtonClick = onRollupButtonClick;
+    this.setupEventHandling();
   }
 
-  getTemplate() {
-    return createHTMLTemplate(this.wayPoint);
+
+  get template() {
+    return createHTMLTemplate(this.#wayPoint);
   }
 
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
+  setupEventHandling() {
+    const rollupBtn = this.element.querySelector('.event__rollup-btn');
 
-    return this.element;
-  }
+    const handleRollupButtonClick = () => {  //on/handler
+      this.onRollupButtonClick(this,this.#wayPoint);
+    };
 
-  removeElement() {
-    this.element = null;
+    rollupBtn.addEventListener('click', handleRollupButtonClick);
   }
 }

@@ -1,5 +1,5 @@
-import {createElement} from 'src/render.js';
 import {formatDateToEventDate,getIconForType,formatTimeRange,timeDifference} from 'src/utils';
+import AbstractView from 'src/framework/view/abstract-view';
 function offersTemplate(wayPoint) {
   if (wayPoint.offers.length > 0) {
     const maxOffersToShow = 2; // Максимальное количество offers для отображения
@@ -59,24 +59,26 @@ function createHTMLTemplate(wayPoint) {
 
 }
 
-export default class TripListElementComponent {
-  constructor(wayPoint) {
-    this.wayPoint = wayPoint;
+export default class TripListElementComponent extends AbstractView {
+  #wayPoint = null;
+  onRollupButtonClick = null;
+  constructor(wayPoint,onRollupButtonClick) {
+    super();
+    this.#wayPoint = wayPoint;
+    this.onRollupButtonClick = onRollupButtonClick;
+    this.setupEventHandling();
   }
 
-  getTemplate() {
-    return createHTMLTemplate(this.wayPoint);
+  get template() {
+    return createHTMLTemplate(this.#wayPoint);
   }
+  setupEventHandling() {
+    const rollupBtn = this.element.querySelector('.event__rollup-btn');
 
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
+    const handleRollupButtonClick = () => {  //on/handler
+      this.onRollupButtonClick(this,this.#wayPoint);
+    };
 
-    return this.element;
-  }
-
-  removeElement() {
-    this.element = null;
+    rollupBtn.addEventListener('click', handleRollupButtonClick);
   }
 }
